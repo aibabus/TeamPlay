@@ -34,7 +34,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", unique = true, nullable = false)
     private String phoneNumber;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -49,5 +49,9 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDate.now();
+    }
 
 }
